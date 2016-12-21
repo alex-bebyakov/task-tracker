@@ -1,0 +1,24 @@
+{
+  "app": {
+    "appName": "Task tracker",
+    "isDevLocal": true,
+    "logErrors": true,
+    "rootUrl": "http://localhost:5002"
+  },
+
+  "web": {
+    "port": 5002,
+    "sessionSecret": "secret_value_!?!"
+  },
+  "email": {
+    "fromNoReply": "noreply@noreply.com"
+  },
+  "auth": {
+    "useAuth": true
+  },
+  "format": {
+    "date": "MM/DD/YYYY",
+    "year": "YYYY",
+    "currencySymbol": "$"
+  }
+}

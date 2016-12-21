@@ -1,0 +1,14 @@
+{
+  "name": "task-tracker",
+  "version": "0.0.1",
+  "license": "MIT",
+  "scripts": {
+	"postinstall": "cd server && npm install && cd ../client && npm install",
+    "start": "cd server && npm run start",
+	"build": "cd server && npm run build && cd ../client && ng build",
+    "build_server": "cd server && npm run build",
+    "build_client": "cd client && ng build"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

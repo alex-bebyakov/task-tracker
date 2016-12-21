@@ -1,0 +1,26 @@
+img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+#size-banner {
+  height: 100vh;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.parallax {
+  text-align: center;
+  background-size: 50%;
+  background-position: center center;
+  background-repeat: no-repeat, repeat;
+  background-attachment: fixed;
+  overflow: hidden;
+}
+
+.parallax-pattern-overlay {
+  background-color: rgba(255, 255, 255, 0.5);
+  display: table;
+  width: 100%;
+}
