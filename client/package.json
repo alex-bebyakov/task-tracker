@@ -31,7 +31,7 @@
     "immutable": "^3.7.6",
     "body-parser": "~1.15.1",
     "debug": "~2.2.0"
-     },
+  },
   "devDependencies": {
     "@types/jasmine": "^2.2.30",
     "@types/node": "^6.0.42",

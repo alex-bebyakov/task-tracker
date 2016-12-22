@@ -1,0 +1,38 @@
+form {
+  text-shadow: 1px 1px 0 rgba(rebeccapurple, .5);
+  color: rebeccapurple;
+  border-radius: 3px;
+  border: rebeccapurple 1px solid;
+  width: 360px;
+  margin: 30px auto;
+  padding: 15px;
+  background-color: lavender;
+}
+
+.form-control {
+  width: 240px;
+  margin: auto;
+  text-shadow: 1px 1px 0 rgba(rebeccapurple, .5);
+  color: rebeccapurple;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+input:focus {
+  border-color: black;
+  text-shadow: 1px 1px 0 rgba(black, .5);
+  color: black;
+}
+
+input {
+  border-color: rebeccapurple;
+}
+
+.alert-danger {
+  width: 240px;
+  margin: auto;
+  text-shadow: 1px 1px 0 rgba(orange, .5);
+  color: orange;
+  background-color: rgba(255, 255, 255, 0);
+  border-color: orange;
+  padding: 5px;
+}

@@ -1,0 +1,26 @@
+<form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+        <label>Адрес электронной почты</label>
+        <input type="text" class="form-control" name="username" [(ngModel)]="model.username"
+               #username="ngModel" required autocomplete="off"/>
+        <div *ngIf="f.submitted && !username.valid" class="help-block">Введите адрес</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+        <label>Пароль</label>
+        <input type="password" class="form-control" name="password" [(ngModel)]="model.password"
+               #password="ngModel" required autocomplete="off"/>
+        <div *ngIf="f.submitted && !password.valid" class="help-block">Введите пароль</div>
+    </div>
+    <div class="form-group">
+        <button *ngIf="isSignUp==false" [disabled]="loading" class="btn btn-primary">Войти</button>
+        <button *ngIf="isSignUp==true" [disabled]="loading" class="btn btn-primary ">Создать аккаунт</button>
+    </div>
+    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+</form>
+
+<div class="sign-up" *ngIf="isSignUp==false">
+    <button (click)="signUp(true)" class="btn btn-primary">Регистрация</button>
+</div>
+<div class="log-in" *ngIf="isSignUp==true">
+    <button (click)="signUp(false)" class="btn btn-primary">Авторизация</button>
+</div>

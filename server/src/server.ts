@@ -4,6 +4,7 @@ import * as bodyParser from 'body-parser';
 import * as compression from 'compression';
 import * as cors from 'cors';
 import * as _ from 'lodash';
+import * as mongoose from 'mongoose';
 
 import config from './config';
 import pathHelper from './helpers/pathHelper';
@@ -22,6 +23,8 @@ function start(options: any) {
 
     const passport = require('passport');
 
+    mongoose.connect('mongodb://localhost:27017/');
+
     routes.init(app, passport);
 
     initErrorHandling(app);
@@ -38,7 +41,9 @@ function initExpress() {
     app.use(bodyParser.urlencoded({extended: true}));
 
     app.use('/', express.static(pathHelper.getRelative('../client/public')));
-
+    app.use('/login', express.static(pathHelper.getRelative('../client/public')));
+    app.use('/task', express.static(pathHelper.getRelative('../client/public')));
+    app.use('/signup', express.static(pathHelper.getRelative('../client/public')));
     app.use(compression());
 
     if (config.app.isDevLocal) app.use(cors());
@@ -66,7 +71,6 @@ function initSession() {
     app.use(session({
         secret: config.web.sessionSecret
     }));
-
 
 
 }

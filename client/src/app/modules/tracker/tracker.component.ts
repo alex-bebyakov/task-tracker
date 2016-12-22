@@ -1,16 +1,16 @@
 import {Component, OnInit} from "@angular/core";
 @Component({
-  selector: 'tracker',
-  templateUrl: 'tracker.component.html',
-  styleUrls: ['tracker.component.scss']
+    selector: 'tracker',
+    templateUrl: 'tracker.component.html',
+    styleUrls: ['tracker.component.scss']
 })
 export class TrackerComponent implements OnInit {
 
 
-  constructor() {
-  }
+    constructor() {
+    }
 
-  ngOnInit() {
+    ngOnInit() {
 
-  }
+    }
 }

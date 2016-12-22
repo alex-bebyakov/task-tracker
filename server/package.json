@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "tsc && node build/startServer",
+    "start": "node build/startServer",
     "seed": "node build/tasks/syncDb",
     "build": "tsc"
   },
@@ -51,6 +51,6 @@
     "@types/mongodb": "2.1.36"
   },
   "devDependencies": {
-     "typescript": "^2.1.4"
+    "typescript": "^2.1.4"
   }
 }

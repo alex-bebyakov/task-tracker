@@ -5,7 +5,6 @@
     "logErrors": true,
     "rootUrl": "http://localhost:5002"
   },
-
   "web": {
     "port": 5002,
     "sessionSecret": "secret_value_!?!"

@@ -1,5 +1,5 @@
-import { Document, Schema, Model, model} from "mongoose";
-import { IUser } from "../interfaces/user";
+import {Document, Schema, Model, model} from "mongoose";
+import {IUser} from "../interfaces/user";
 
 export interface IUserModel extends IUser, Document {
     name(): any;
@@ -25,7 +25,7 @@ UserSchema.pre("save", next => {
     }
     next();
 });
-UserSchema.methods.name = function(): any {
+UserSchema.methods.name = function (): any {
     return (this.username.trim());
 };
 
