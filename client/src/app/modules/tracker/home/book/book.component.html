@@ -1,0 +1,31 @@
+<div class="todo list-group">
+    <a class="list-group-item active todo-head" style="color:white">Новые</a>
+    <div *ngFor="let task of bookOfTasks['todo']" class="list-group-item" [style.background-color]="getColor(task.priority)">
+        <div class="title">{{task.title}}</div>
+        <progress class="progress progress-warning" [attr.value]="task.progress" max="100"></progress>
+        <div style="text-align: right; font-size: 12pt">Срок: {{task.finish}}</div>
+    </div>
+</div>
+<div class="inprogress list-group">
+    <a class="list-group-item active inprogress-head" style="color:white">В работе</a>
+    <div *ngFor="let task of bookOfTasks['inprogress']" class="list-group-item" [style.background-color]="getColor(-1)" >
+        <div class="title">{{task.title}}</div>
+        <progress class="progress progress-warning" [attr.value]="task.progress" max="100"></progress>
+
+        <div style="text-align: right; font-size: 12pt">Принято: {{task.start}}</div>
+        <div *ngIf="task.elapsed_h==0" style="text-align: right; font-size: 12pt">Затрачено: {{task.elapsed_min}} мин</div>
+        <div *ngIf="task.elapsed_h>0" style="text-align: right; font-size: 12pt">Затрачено: {{task.elapsed_h}} ч : {{task.elapsed_min}} мин</div>
+        <div style="text-align: right; font-size: 12pt">Срок: {{task.finish}}</div>
+        <div style="text-align: right; font-size: 12pt">Приоритет: <span class="fa fa-flag" aria-hidden="true" [style.color]="getColor(task.priority)"></span></div>
+    </div>
+</div>
+<div class="completed list-group">
+    <a class="list-group-item active completed-head" style="color:white">Выполнено</a>
+    <div *ngFor="let task of bookOfTasks['completed']" class="completed" class="list-group-item">
+        <div class="title">{{task.title}}</div>
+        <div style="text-align: right; font-size: 12pt">Принято: {{task.start}}</div>
+        <div style="text-align: right; font-size: 12pt">Завершено: {{task.completed}}</div>
+        <div *ngIf="task.elapsed_h==0" style="text-align: right; font-size: 12pt">Затрачено: {{task.elapsed_min}} мин</div>
+    <div *ngIf="task.elapsed_h>0" style="text-align: right; font-size: 12pt">Затрачено: {{task.elapsed_h}} ч : {{task.elapsed_min}} мин</div>
+    </div>
+</div>

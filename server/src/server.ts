@@ -23,7 +23,7 @@ function start(options: any) {
 
     const passport = require('passport');
 
-    mongoose.connect('mongodb://localhost:27017/');
+    mongoose.connect(config.db.host);
 
     routes.init(app, passport);
 
@@ -41,9 +41,13 @@ function initExpress() {
     app.use(bodyParser.urlencoded({extended: true}));
 
     app.use('/', express.static(pathHelper.getRelative('../client/public')));
+    app.use('', express.static(pathHelper.getRelative('../client/public')));
     app.use('/login', express.static(pathHelper.getRelative('../client/public')));
-    app.use('/task', express.static(pathHelper.getRelative('../client/public')));
+    app.use('/order', express.static(pathHelper.getRelative('../client/public')));
     app.use('/signup', express.static(pathHelper.getRelative('../client/public')));
+    app.use('/create', express.static(pathHelper.getRelative('../client/public')));
+    app.use('/priority', express.static(pathHelper.getRelative('../client/public')));
+    app.use('/finish', express.static(pathHelper.getRelative('../client/public')));
     app.use(compression());
 
     if (config.app.isDevLocal) app.use(cors());

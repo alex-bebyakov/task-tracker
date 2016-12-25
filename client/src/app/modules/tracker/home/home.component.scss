@@ -1,7 +1,21 @@
-p {
-  background-color: darkorange;
-  padding: 20px 10px;
-  border-radius: 5px;
-  width: 480px;
-  margin: 250px auto;
+.active{
+  background-color: rebeccapurple;
+
+}
+.sidebar{
+  margin-top: 30px;
+  text-align: left;
+  color:white;
+}
+.sidebar-head{
+
+  text-align: center;
+}
+
+.list-group-item,.dropdown-item{
+  color: #0275d8;
+}
+
+.dropdown-toggle:hover{
+  cursor: pointer;
 }

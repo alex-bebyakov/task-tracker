@@ -10,7 +10,7 @@ import {routing} from "./app.routing";
 import {AuthGuard} from "./services/guard.service";
 import {AuthenticationService} from "./services/authentication.service";
 import {LoginComponent} from "./modules/tracker/login/login.component";
-
+import { DateValueAccessorModule } from 'angular-date-value-accessor';
 
 @NgModule({
     declarations: [
@@ -23,6 +23,7 @@ import {LoginComponent} from "./modules/tracker/login/login.component";
         NavbarModule,
         FooterModule,
         TrackerModule,
+        DateValueAccessorModule,
         routing
     ],
     bootstrap: [AppComponent]

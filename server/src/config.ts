@@ -50,6 +50,9 @@ export function loadConfig() {
     configValues.web.port = get('web.port');
     configValues.web.sessionSecret = get('web.sessionSecret');
 
+    (<any>configValues).db = {};
+    configValues.db.host = get('db.host');
+
     (<any>configValues).email = {};
     configValues.email.fromNoReply = get('email.fromNoReply');
 

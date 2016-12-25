@@ -16,7 +16,7 @@ export var UserSchema: Schema = new Schema({
         type: String,
         required: true
     },
-    tacks: []
+    tasks: [{ type: Schema.Types.ObjectId, ref: 'Task' }]
 });
 UserSchema.pre("save", next => {
     let now = new Date();
@@ -28,5 +28,7 @@ UserSchema.pre("save", next => {
 UserSchema.methods.name = function (): any {
     return (this.username.trim());
 };
+
+
 
 export const User: Model<IUserModel> = model<IUserModel>("User", UserSchema);

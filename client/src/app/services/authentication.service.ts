@@ -27,7 +27,6 @@ export class AuthenticationService {
                 if (token) {
                     localStorage.setItem('currentUser', JSON.stringify({
                         username: username,
-                        password: password,
                         token: token
                     }));
                     return 0;

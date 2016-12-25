@@ -14,7 +14,6 @@ export class LoginComponent implements OnInit {
     loading = false;
     error = '';
     isSignUp: boolean = false
-
     constructor(public authenticationService: AuthenticationService, public router: Router) {
 
     }
@@ -47,5 +46,7 @@ export class LoginComponent implements OnInit {
 
     signUp(signUp: boolean) {
         this.isSignUp = signUp;
+        this.error = ''
+        this.model= {};
     }
 }

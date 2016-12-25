@@ -9,6 +9,9 @@
     "port": 5002,
     "sessionSecret": "secret_value_!?!"
   },
+  "db":{
+    "host": "mongodb://localhost/test"
+  },
   "email": {
     "fromNoReply": "noreply@noreply.com"
   },

@@ -9,13 +9,12 @@ export default function init(passport) {
         passwordField: 'password'
     }, function (username, password, done) {
         User.findOne({username: username}, function (err, user) {
-            console.log(username)
             return err
                 ? done(err)
                 : user
-                ? password === user.password
-                ? done(null, user)
-                : done(null, false, {message: 'Incorrect password.'})
+                    ? password === user.password
+                        ? done(null, user)
+                        : done(null, false, {message: 'Incorrect password.'})
                 : done(null, false, {message: 'Incorrect username.'});
         });
     }));

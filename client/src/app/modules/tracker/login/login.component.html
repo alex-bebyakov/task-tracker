@@ -1,3 +1,10 @@
+<div class="btn btn-info sign-up pull-right" *ngIf="isSignUp==false" (click)="signUp(true)">
+    Регистрация
+</div>
+<div class="btn btn-info log-in pull-right" *ngIf="isSignUp==true" (click)="signUp(false)">
+    Авторизация
+</div>
+
 <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
         <label>Адрес электронной почты</label>
@@ -15,12 +22,8 @@
         <button *ngIf="isSignUp==false" [disabled]="loading" class="btn btn-primary">Войти</button>
         <button *ngIf="isSignUp==true" [disabled]="loading" class="btn btn-primary ">Создать аккаунт</button>
     </div>
+
     <div *ngIf="error" class="alert alert-danger">{{error}}</div>
 </form>
 
-<div class="sign-up" *ngIf="isSignUp==false">
-    <button (click)="signUp(true)" class="btn btn-primary">Регистрация</button>
-</div>
-<div class="log-in" *ngIf="isSignUp==true">
-    <button (click)="signUp(false)" class="btn btn-primary">Авторизация</button>
-</div>
+

@@ -1,0 +1,49 @@
+<div class="list-group sidebar">
+    <a class="list-group-item active sidebar-head">Карточка задачи</a>
+    <form name="form" (ngSubmit)="f.form.valid && create()" #f="ngForm" novalidate class=" list-group-item task-create">
+        <div class="form-group  pull-right description" [ngClass]="{ 'has-error': f.submitted && !description.valid }">
+            <label>Описание</label>
+            <div class="description-area">
+                <textarea class="form-control description-text" name="description" [(ngModel)]="task.description"
+                      #description="ngModel" required autocomplete="off">
+                </textarea>
+                <div *ngIf="f.submitted && !description.valid" class="help-block">Отсутствует описание задачи</div>
+            </div>
+        </div>
+        <div class="form-group title" [ngClass]="{ 'has-error': f.submitted && !title.valid }">
+            <label>Наименование</label>
+            <input type="text" class="form-control" name="title" [(ngModel)]="task.title"
+                   #title="ngModel" required autocomplete="off"/>
+            <div *ngIf="f.submitted && !title.valid" class="help-block">Введите наименование задачи</div>
+        </div>
+        <div class="form-group estimate" [ngClass]="{ 'has-error': f.submitted && !finish.valid }">
+            <label>Дата завершения</label>
+            <input type="date" class="form-control" name="finish" useValueAsDate [(ngModel)]="task.finish"
+                   #finish="ngModel" required autocomplete="off"/>
+            <div *ngIf="f.submitted && !finish.valid" class="help-block">Введите дату</div>
+        </div>
+        <div class="form-group priority" [ngClass]="{ 'has-error': f.submitted && !priority.valid }">
+            <label>Приоритет</label>
+            <select class="form-control" name="priority" [(ngModel)]="task.priority"
+                    #priority="ngModel" required autocomplete="off">
+                <option selected value="1">Нормальный</option>
+                <option value="0">Высокий</option>
+                <option value="2">Низкий</option>
+            </select>
+            <div *ngIf="f.submitted && !priority.valid" class="help-block">Не определен уровень приоритета задачи</div>
+        </div>
+        <div class="form-group pull-right" style="margin-top: 30px;">
+            <button class="btn btn-primary">Создать</button>
+        </div>
+        <div class="form-group executor" [ngClass]="{ 'has-error': f.submitted && !executor.valid }">
+            <label>Исполнитель</label>
+            <select class="form-control" name="executor" [(ngModel)]="task.executor"
+                    #executor="ngModel" required autocomplete="off">
+                <option *ngFor="let user of users let i = index" value={{user}}>{{user}}</option>
+            </select>
+            <div *ngIf="f.submitted && !executor.valid" class="help-block">Не определен исполнитель</div>
+        </div>
+        <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+    </form>
+
+</div>

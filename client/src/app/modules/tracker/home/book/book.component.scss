@@ -1,0 +1,22 @@
+.todo,.inprogress,.completed{
+  display: inline-block;
+  float: left;
+  margin-top: 30px;
+  margin-left: 15px;
+  width: 20vw;
+
+}
+.list-group-item:hover{
+  cursor: pointer;
+}
+.todo{
+
+}
+
+.inprogress{
+
+}
+
+.completed{
+
+}
