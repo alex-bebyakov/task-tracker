@@ -6,15 +6,18 @@ form {
   background-color: white;
 }
 
-.form-control {
+.form-control,.status,.estimate{
   text-shadow: 1px 1px 0 rgba(rebeccapurple, .5);
 }
 
 .form-group{
 
 }
+.status,.estimate{
+  color:black;
+}
 
-.executor,.priority,.title,.estimate{
+.executor,.priority,.title,.finish,.status,.estimate{
    width: 30%;
  }
 

@@ -2,6 +2,7 @@ import {Routes} from "@angular/router";
 import {ListComponent} from "./list.component";
 
 export const listRoutes: Routes = [
-    {path: '/task', component: ListComponent}
+    {path: 'create', component: ListComponent},
+    {path: 'update', component: ListComponent}
 ];
 

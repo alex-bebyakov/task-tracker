@@ -9,7 +9,7 @@ export class Task {
     completed:Date;
     createdAt: Date;
     constructor() {
-
+        this.title=''
 
     }
 }

@@ -23,14 +23,16 @@ function start(options: any) {
 
     const passport = require('passport');
 
-    mongoose.connect(config.db.host);
+    const mongo_uri = process.env['MONGODB_URI']||config.db.host
+    mongoose.connect(mongo_uri);
 
     routes.init(app, passport);
 
     initErrorHandling(app);
 
-    app.listen(config.web.port, function () {
-        console.log(`Server is listening on port ${config.web.port}!`);
+    const port=process.env.PORT || config.web.port
+    app.listen(port, function () {
+        console.log(`Server is listening on port ${port}!`);
     });
 }
 
@@ -40,14 +42,14 @@ function initExpress() {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: true}));
 
-    app.use('/', express.static(pathHelper.getRelative('../client/public')));
-    app.use('', express.static(pathHelper.getRelative('../client/public')));
-    app.use('/login', express.static(pathHelper.getRelative('../client/public')));
-    app.use('/order', express.static(pathHelper.getRelative('../client/public')));
-    app.use('/signup', express.static(pathHelper.getRelative('../client/public')));
-    app.use('/create', express.static(pathHelper.getRelative('../client/public')));
-    app.use('/priority', express.static(pathHelper.getRelative('../client/public')));
-    app.use('/finish', express.static(pathHelper.getRelative('../client/public')));
+    app.use('/', express.static(pathHelper.getRelative('../client/dist')));
+    app.use('', express.static(pathHelper.getRelative('../client/dist')));
+    app.use('/login', express.static(pathHelper.getRelative('../client/dist')));
+    app.use('/update', express.static(pathHelper.getRelative('../client/dist')));
+    app.use('/signup', express.static(pathHelper.getRelative('../client/dist')));
+    app.use('/create', express.static(pathHelper.getRelative('../client/dist')));
+    app.use('/priority', express.static(pathHelper.getRelative('../client/dist')));
+    app.use('/finish', express.static(pathHelper.getRelative('../client/dist')));
     app.use(compression());
 
     if (config.app.isDevLocal) app.use(cors());

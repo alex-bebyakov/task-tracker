@@ -1,11 +1,11 @@
 <div class="list-group sidebar">
     <a class="list-group-item active sidebar-head">Карточка задачи</a>
-    <form name="form" (ngSubmit)="f.form.valid && create()" #f="ngForm" novalidate class=" list-group-item task-create">
+    <form name="form" (ngSubmit)="f.form.valid && update()" #f="ngForm" novalidate class=" list-group-item task-create">
         <div class="form-group  pull-right description" [ngClass]="{ 'has-error': f.submitted && !description.valid }">
             <label>Описание</label>
             <div class="description-area">
                 <textarea class="form-control description-text" name="description" [(ngModel)]="task.description"
-                      #description="ngModel" required autocomplete="off">
+                                     #description="ngModel" required autocomplete="off">
                 </textarea>
                 <div *ngIf="f.submitted && !description.valid" class="help-block">Отсутствует описание задачи</div>
             </div>
@@ -16,7 +16,7 @@
                    #title="ngModel" required autocomplete="off"/>
             <div *ngIf="f.submitted && !title.valid" class="help-block">Введите наименование задачи</div>
         </div>
-        <div class="form-group estimate" [ngClass]="{ 'has-error': f.submitted && !finish.valid }">
+        <div class="form-group finish" [ngClass]="{ 'has-error': f.submitted && !finish.valid }">
             <label>Дата завершения</label>
             <input type="date" class="form-control" name="finish" useValueAsDate [(ngModel)]="task.finish"
                    #finish="ngModel" required autocomplete="off"/>
@@ -33,9 +33,14 @@
             <div *ngIf="f.submitted && !priority.valid" class="help-block">Не определен уровень приоритета задачи</div>
         </div>
         <div class="form-group pull-right" style="margin-top: 30px;">
-            <button class="btn btn-primary">Создать</button>
+            <button *ngIf="isCreate==true" class="btn btn-primary">Создать</button>
+            <div *ngIf="isCreate==false">
+                <button  *ngIf="task.status=='todo'" class="btn btn-primary" style="margin-top: -30px">В работу</button>
+                <button  *ngIf="task.status=='inprogress'" class="btn btn-primary" style="margin-top: -30px">Выполнено</button>
+                <button  *ngIf="task.status=='completed'" class="btn btn-primary" style="margin-top: -50px">Возобновить</button>
+            </div>
         </div>
-        <div class="form-group executor" [ngClass]="{ 'has-error': f.submitted && !executor.valid }">
+        <div *ngIf="isCreate==true" class="form-group executor" [ngClass]="{ 'has-error': f.submitted && !executor.valid }">
             <label>Исполнитель</label>
             <select class="form-control" name="executor" [(ngModel)]="task.executor"
                     #executor="ngModel" required autocomplete="off">
@@ -43,6 +48,24 @@
             </select>
             <div *ngIf="f.submitted && !executor.valid" class="help-block">Не определен исполнитель</div>
         </div>
+
+        <div *ngIf="isCreate==false" >
+            <label>
+                Статус задачи: <span class="status">{{status}}</span>
+            </label>
+            <div></div>
+            <div *ngIf="estimate>0">
+            <label *ngIf="task.status!='completed'">
+                До завершения осталось: <span class="estimate">{{estimate}} дн</span>
+            </label>
+            </div>
+            <div *ngIf="estimate==0">
+                <label *ngIf="task.status!='completed'">
+                    До завершения осталось: <span class="estimate">менее одного дня</span>
+                </label>
+            </div>
+        </div>
+
         <div *ngIf="error" class="alert alert-danger">{{error}}</div>
     </form>
 

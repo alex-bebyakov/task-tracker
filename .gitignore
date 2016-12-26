@@ -7,7 +7,7 @@ server/build/
 server/logs/
 
 client/node_modules/
-client/public/
+client/dist/
 
 
 

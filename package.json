@@ -3,11 +3,11 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "postinstall": "cd server && npm install && cd ../client && npm install",
+    "postinstall": "cd server && npm install && cd ../client && npm install && cd ../ && npm run build",
     "start": "cd server && npm run start",
-    "build": "cd server && npm run build && cd ../client && ng build",
+    "build": "cd server && npm run build && cd ../client && npm run build",
     "build_server": "cd server && npm run build",
-    "build_client": "cd client && ng build"
+    "build_client": "cd client && npm run build"
   },
   "dependencies": {},
   "devDependencies": {}

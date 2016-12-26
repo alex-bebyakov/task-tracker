@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {AuthenticationService} from "../../../services/authentication.service";
+import {Response} from "@angular/http";
 
 @Component({
     selector: 'login',
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.authenticationService.out();
+        this.authenticationService.out().subscribe()
+
     }
 
     login() {

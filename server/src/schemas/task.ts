@@ -12,6 +12,7 @@ export var TaskSchema: Schema = new Schema({
     },
     title:{
         type:String,
+        unique:true
     },
     description:{
         type:String,
@@ -32,7 +33,6 @@ export var TaskSchema: Schema = new Schema({
     },
     start:{
         type:Date,
-        required:true,
     },
     completed:{
         type:Date,
