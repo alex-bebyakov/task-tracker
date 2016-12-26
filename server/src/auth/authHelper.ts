@@ -12,7 +12,6 @@ export default {
     sendAuthErrorMessage,
     sendAuthMessage,
     sendResetPasswordEmail,
-    sendActivationEmail,
     isValidEmail,
     isValidPassword
 };
