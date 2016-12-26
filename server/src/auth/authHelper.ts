@@ -1,5 +1,4 @@
 import config from '../config';
-import emailHelper from '../helpers/emailHelper';
 import errorHelper from '../helpers/errorHelper';
 import AppError from '../appError';
 import textValue from '../helpers/textValueHelper';
