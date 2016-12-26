@@ -10,8 +10,6 @@ export default {
     redirectToLogIn,
     sendAuthErrorMessage,
     sendAuthMessage,
-    sendResetPasswordEmail,
-    isValidEmail,
     isValidPassword
 };
 
@@ -61,30 +59,6 @@ function sendAuthMessage(message, type, done, req) {
     if (message) return done(null, false, setStatusMessage(req, message, type));
 
     return done();
-}
-
-function sendResetPasswordEmail(email, token) {
-    let data = {
-        token,
-        siteRootUrl: config.app.rootUrl
-    };
-
-    return emailHelper.sendEmailTemplate('password_reset', data, {
-        to: email,
-        from: config.email.fromNoReply
-    });
-}
-
-function sendActivationEmail(email, token) {
-    let data = {
-        token,
-        siteRootUrl: config.app.rootUrl
-    };
-
-    return emailHelper.sendEmailTemplate('activation', data, {
-        to: email,
-        from: config.email.fromNoReply
-    });
 }
 
 function isValidEmail(email) {
