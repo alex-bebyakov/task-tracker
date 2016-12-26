@@ -1,5 +1,5 @@
 # Task-tracker
-np
+
 ## Установить библиотеки
 npm install
 
@@ -13,5 +13,5 @@ npm start
 http://localhost:5002
 
 ## Глобальный адрес приложения
-http://task-tracker.herokuapp.com
+http://task-tracker-demo.herokuapp.com
 
