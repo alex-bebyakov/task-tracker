@@ -11,8 +11,7 @@ export var TaskSchema: Schema = new Schema({
         ref: 'User'
     },
     title:{
-        type:String,
-        unique:true
+        type:String
     },
     description:{
         type:String,

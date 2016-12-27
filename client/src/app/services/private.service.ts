@@ -25,6 +25,7 @@ export class PrivateService {
     }
 
     setTask(task: any, status: string) {
+        this.task.id = task['_id'];
         this.task.status = status;
         this.task.priority = task['priority']
         this.task.completed = task['completed']

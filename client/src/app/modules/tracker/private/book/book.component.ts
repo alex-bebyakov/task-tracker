@@ -1,7 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {PrivateService} from "../../../../services/private.service";
-import {Task} from "../../../../models/task";
 
 declare var _:any
 
@@ -40,6 +39,7 @@ export class BookComponent implements OnInit {
                 }
                 result['progress']=progress
                 result['finish']= this.tasksService.formatDate(end,'%Y-%m-%d')
+                result['_id']=data._id
                 result['title']=data.title
                 result['description']=data.description
                 result['priority']=data.priority
