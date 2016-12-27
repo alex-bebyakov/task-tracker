@@ -33,10 +33,14 @@ export class BookComponent implements OnInit {
                 let end=new Date(data.finish)
                 let completed=new Date(data.completed)
                 let result={}
+                console.log(now)
+                console.log(create)
+                console.log(end)
                 let progress=(+now-+create)/(+end-+create)*100
-                if(progress<0){
+                if(progress<-1){
                     progress=100
                 }
+
                 result['progress']=progress
                 result['finish']= this.tasksService.formatDate(end,'%Y-%m-%d')
                 result['_id']=data._id
