@@ -1,51 +1,81 @@
-<div class="todo list-group" *ngIf="bookOfTasks['todo'].length!=0">
-    <a class="list-group-item active todo-head" style="color:white">Новые</a>
-    <div (click)="goTask(task,'todo')" *ngFor="let task of bookOfTasks['todo']" class="list-group-item" [style.background-color]="getColor(task.priority)">
-        <div class="title">{{task.title}}</div>
-        <progress class="progress progress-warning" [attr.value]="task.progress" max="100"></progress>
-        <div style="text-align: right; font-size: 12pt">Срок: {{task.finish}}</div>
+<div *ngIf="loading==false">
+    <div class="todo list-group">
+        <a class="list-group-item active todo-head"
+           style="color:white">
+            Новые
+        </a>
+        <div *ngIf="bookOfTasks['todo'].length!=0">
+            <div *ngFor="let task of bookOfTasks['todo']" class="list-group-item"
+                 [style.background-color]="getColor(task.priority)"
+                 (click)="goTask(task,'todo')">
+                <div class="title">{{task.title}}</div>
+                <progress class="progress progress-warning" [attr.value]="task.progress" max="100"></progress>
+                <div style="text-align: right; font-size: 12pt">Срок: {{task.finish}}</div>
+            </div>
+        </div>
+        <div *ngIf="bookOfTasks['todo'].length==0"
+             class="list-group-item">
+            Новых задач не поступало.
+        </div>
     </div>
-</div>
-<div class="inprogress list-group" *ngIf="bookOfTasks['inprogress'].length!=0">
-    <a class="list-group-item active inprogress-head" style="color:white">В работе</a>
-    <div (click)="goTask(task,'inprogress')" *ngFor="let task of bookOfTasks['inprogress']" class="list-group-item" [style.background-color]="getColor(-1)" >
-        <div class="title">{{task.title}}</div>
-        <progress class="progress progress-warning" [attr.value]="task.progress" max="100"></progress>
+    <div class="inprogress list-group">
+        <a class="list-group-item active inprogress-head"
+           style="color:white">
+            В работе
+        </a>
+        <div *ngIf="bookOfTasks['inprogress'].length!=0">
+            <div *ngFor="let task of bookOfTasks['inprogress']"
+                 class="list-group-item"
+                 (click)="goTask(task,'inprogress')"
+                 [style.background-color]="getColor(-1)">
+                <div class="title">{{task.title}}</div>
+                <progress class="progress progress-warning" [attr.value]="task.progress" max="100"></progress>
+                <div style="text-align: right; font-size: 12pt">Принято: {{task.start}}</div>
+                <div *ngIf="task.elapsed_h==0" style="text-align: right; font-size: 12pt">Затрачено:
+                    {{task.elapsed_min}}
+                    мин
+                </div>
+                <div *ngIf="task.elapsed_h>0" style="text-align: right; font-size: 12pt">Затрачено: {{task.elapsed_h}} ч
+                    :
+                    {{task.elapsed_min}} мин
+                </div>
+                <div style="text-align: right; font-size: 12pt">Срок: {{task.finish}}</div>
+                <div style="text-align: right; font-size: 12pt">Приоритет: <span class="fa fa-flag" aria-hidden="true"
+                                                                                 [style.color]="getColor(task.priority)"></span>
+                </div>
+            </div>
+        </div>
+        <div class="list-group-item"
+             *ngIf="bookOfTasks['inprogress'].length==0">
+            Текущих работ не обнаружено.
+        </div>
+    </div>
 
-        <div style="text-align: right; font-size: 12pt">Принято: {{task.start}}</div>
-        <div *ngIf="task.elapsed_h==0" style="text-align: right; font-size: 12pt">Затрачено: {{task.elapsed_min}} мин</div>
-        <div *ngIf="task.elapsed_h>0" style="text-align: right; font-size: 12pt">Затрачено: {{task.elapsed_h}} ч : {{task.elapsed_min}} мин</div>
-        <div style="text-align: right; font-size: 12pt">Срок: {{task.finish}}</div>
-        <div style="text-align: right; font-size: 12pt">Приоритет: <span class="fa fa-flag" aria-hidden="true" [style.color]="getColor(task.priority)"></span></div>
-    </div>
-</div>
-<div class="completed list-group" *ngIf="bookOfTasks['completed'].length!=0">
-    <a class="list-group-item active completed-head" style="color:white">Выполнено</a>
-    <div (click)="goTask(task,'completed')"  *ngFor="let task of bookOfTasks['completed']" class="completed" class="list-group-item">
-        <div class="title">{{task.title}}</div>
-        <div style="text-align: right; font-size: 12pt">Принято: {{task.start}}</div>
-        <div style="text-align: right; font-size: 12pt">Завершено: {{task.completed}}</div>
-        <div *ngIf="task.elapsed_h==0" style="text-align: right; font-size: 12pt">Затрачено: {{task.elapsed_min}} мин</div>
-    <div *ngIf="task.elapsed_h>0" style="text-align: right; font-size: 12pt">Затрачено: {{task.elapsed_h}} ч : {{task.elapsed_min}} мин</div>
-    </div>
-</div>
 
-
-<div class="todo list-group" *ngIf="bookOfTasks['todo'].length==0">
-    <a class="list-group-item active todo-head" style="color:white">Новые</a>
-    <div class="list-group-item">
-        Новых задач не поступало.
-    </div>
-</div>
-<div class="inprogress list-group" *ngIf="bookOfTasks['inprogress'].length==0">
-    <a class="list-group-item active inprogress-head" style="color:white">В работе</a>
-    <div class="list-group-item" >
-        Текущих работ не обнаружено.
-    </div>
-</div>
-<div class="completed list-group" *ngIf="bookOfTasks['completed'].length==0">
-    <a class="list-group-item active completed-head" style="color:white">Выполнено</a>
-    <div class="completed" class="list-group-item">
-       У Вас нет завершенных задач.
+    <div class="completed list-group">
+        <a class="list-group-item active completed-head" style="color:white">Выполнено</a>
+        <div *ngIf="bookOfTasks['completed'].length!=0">
+            <div *ngFor="let task of bookOfTasks['completed']"
+                 (click)="goTask(task,'completed')"
+                 class="completed"
+                 class="list-group-item">
+                <div class="title">{{task.title}}</div>
+                <div style="text-align: right; font-size: 12pt">Принято: {{task.start}}</div>
+                <div style="text-align: right; font-size: 12pt">Завершено: {{task.completed}}</div>
+                <div *ngIf="task.elapsed_h==0" style="text-align: right; font-size: 12pt">Затрачено:
+                    {{task.elapsed_min}}
+                    мин
+                </div>
+                <div *ngIf="task.elapsed_h>0" style="text-align: right; font-size: 12pt">Затрачено: {{task.elapsed_h}} ч
+                    :
+                    {{task.elapsed_min}} мин
+                </div>
+            </div>
+        </div>
+        <div *ngIf="bookOfTasks['completed'].length==0"
+             class="completed"
+             class="list-group-item">
+            У Вас нет завершенных задач.
+        </div>
     </div>
 </div>

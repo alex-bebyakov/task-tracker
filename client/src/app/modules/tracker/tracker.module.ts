@@ -11,7 +11,6 @@ import {ListComponent} from "./private/list/list.component";
 import {BookComponent} from "./private/book/book.component";
 import {PrivateService} from "../../services/private.service";
 
-
 @NgModule({
     imports: [
         CommonModule, trackerRouting, FormsModule

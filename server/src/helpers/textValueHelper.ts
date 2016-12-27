@@ -8,8 +8,6 @@ const textValuesInfo = require(textValuesPath);
 export default {
     byKey,
     error,
-    info,
-    warning
 };
 
 function byKey(key: string, data?: Object): string {
@@ -24,18 +22,6 @@ function byKey(key: string, data?: Object): string {
 
 function error(type: string, code: string, data?: Object) {
     let key = `errors.${type}.${code}`;
-
-    return byKey(key, data);
-}
-
-function info(type: string, code: string, data?: Object) {
-    let key = `info.${type}.${code}`;
-
-    return byKey(key, data);
-}
-
-function warning(type: string, code: string, data?: Object) {
-    let key = `warning.${type}.${code}`;
 
     return byKey(key, data);
 }

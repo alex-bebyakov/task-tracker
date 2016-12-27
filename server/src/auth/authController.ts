@@ -18,6 +18,7 @@ export default function init(passport) {
                 : done(null, false, {message: 'Incorrect username.'});
         });
     }));
+
 }
 
 

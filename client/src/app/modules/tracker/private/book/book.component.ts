@@ -15,24 +15,30 @@ declare var _:any
 export class BookComponent implements OnInit {
     bookOfTasks=[]
     STATES=['todo','inprogress','completed']
+    loading:boolean
     constructor(private tasksService: PrivateService, public router: Router) {
 
     }
 
     ngOnInit() {
-
+        this.loading=true
         for(let i=0;i<this.STATES.length;i++){
             this.bookOfTasks[this.STATES[i]]=[]
         }
         this.tasksService.tasks().subscribe(results=>{
             results.forEach(data=>{
+
                 let now=new Date()
                 let create=new Date(data.createdAt)
                 let start=new Date(data.start)
                 let end=new Date(data.finish)
                 let completed=new Date(data.completed)
                 let result={}
-                result['progress']=(+now-+create)/(+end-+create)*100
+                let progress=(+now-+create)/(+end-+create)*100
+                if(progress<0){
+                    progress=100
+                }
+                result['progress']=progress
                 result['finish']= this.tasksService.formatDate(end,'%Y-%m-%d')
                 result['title']=data.title
                 result['description']=data.description
@@ -53,7 +59,7 @@ export class BookComponent implements OnInit {
             if(path){
                 this.sortByPath(path)
             }
-
+            this.loading=false
 
 
         })
@@ -68,9 +74,7 @@ export class BookComponent implements OnInit {
             this.bookOfTasks[this.STATES[i]]=_.sortBy(this.bookOfTasks[this.STATES[i]],[path])
 
         }
-
-
-        }
+    }
 
     goTask(task:any,status:string){
         this.tasksService.setTask(task,status)

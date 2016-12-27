@@ -1,5 +1,4 @@
 import errorHelper from '../helpers/errorHelper';
-import AppError from '../appError';
 
 export default {
     sendFailureMessage,
@@ -11,7 +10,7 @@ function sendFailureMessage(error, res) {
     errorHelper.logError(error);
     let errorMessage = errorHelper.getErrorMessage(error);
 
-    res.send({'status': 'failure', message: errorMessage});
+    res.send({status: 'failure', message: errorMessage});
 }
 
 function sendSuccessMessage(message, res) {

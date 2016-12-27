@@ -1,5 +1,6 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, OnDestroy} from "@angular/core";
 import {Router} from "@angular/router";
+import {PrivateService} from "../../../services/private.service";
 
 
 @Component({
@@ -9,19 +10,21 @@ import {Router} from "@angular/router";
 
 })
 
-export class PrivateComponent implements OnInit {
+export class PrivateComponent implements OnInit, OnDestroy{
 
-    constructor(public router: Router) {
+    constructor(public router: Router,private privateService: PrivateService) {
 
     }
 
     ngOnInit() {
-
+        let username = JSON.parse(localStorage.getItem("currentUser")).username
+        this.privateService.setUsername(username)
 
     }
 
-    logout(){
-        window.location.href='http://'+location.host+'/login'
-    }
+    ngOnDestroy(){
+        localStorage.removeItem('currentUser');
+}
+
 
 }

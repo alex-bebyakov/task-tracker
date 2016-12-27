@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {AuthenticationService} from "../../../services/authentication.service";
 import {Response} from "@angular/http";
+import {PrivateService} from "../../../services/private.service";
 
 @Component({
     selector: 'login',
@@ -15,13 +16,13 @@ export class LoginComponent implements OnInit {
     loading = false;
     error = '';
     isSignUp: boolean = false
-    constructor(public authenticationService: AuthenticationService, public router: Router) {
+    constructor(public authenticationService: AuthenticationService, private userService:PrivateService,public router: Router) {
 
     }
 
     ngOnInit() {
         this.authenticationService.out().subscribe()
-
+        this.userService.setUsername("")
     }
 
     login() {

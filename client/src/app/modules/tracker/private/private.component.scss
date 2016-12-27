@@ -2,6 +2,12 @@
   background-color: rebeccapurple;
 
 }
+
+.tasks-list{
+  display: inline-block;
+  float: left;
+}
+
 .sidebar{
   margin-top: 30px;
   text-align: left;
@@ -16,6 +22,6 @@
   color: #0275d8;
 }
 
-.dropdown-toggle,.logout,.create:hover{
+.dropdown-toggle,.logout,.create,.tasks-list:hover{
   cursor: pointer;
 }

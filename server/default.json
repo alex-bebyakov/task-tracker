@@ -12,11 +12,16 @@
   "db":{
     "host": "mongodb://localhost/test"
   },
-  "email": {
-    "fromNoReply": "noreply@noreply.com"
-  },
-  "auth": {
-    "useAuth": true
+  "res": "../client/dist",
+  "api":{
+    "a":"",
+    "b":"/",
+    "c":"/login",
+    "d":"/update",
+    "e":"/signup",
+    "f":"/create",
+    "g":"/priority",
+    "h":"/finish"
   },
   "format": {
     "date": "MM/DD/YYYY",

@@ -9,7 +9,7 @@ const trackerRoutes: Routes = [
         component: TrackerComponent,
         children: [
             ...privateRoutes,
-            ...loginRoutes,
+            ...loginRoutes
         ]
 
     }

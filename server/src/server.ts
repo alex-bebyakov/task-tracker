@@ -37,22 +37,23 @@ function start(options: any) {
 }
 
 function initExpress() {
-    if (config.app.isDevLocal) app.use(morgan('dev'));
-
+    if (config.app.isDevLocal){
+        app.use(morgan('dev'));
+    }
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: true}));
-
-    app.use('/', express.static(pathHelper.getRelative('../client/dist')));
-    app.use('', express.static(pathHelper.getRelative('../client/dist')));
-    app.use('/login', express.static(pathHelper.getRelative('../client/dist')));
-    app.use('/update', express.static(pathHelper.getRelative('../client/dist')));
-    app.use('/signup', express.static(pathHelper.getRelative('../client/dist')));
-    app.use('/create', express.static(pathHelper.getRelative('../client/dist')));
-    app.use('/priority', express.static(pathHelper.getRelative('../client/dist')));
-    app.use('/finish', express.static(pathHelper.getRelative('../client/dist')));
+    app.use(config.api.a, express.static(pathHelper.getRelative(config.res)));
+    app.use(config.api.b, express.static(pathHelper.getRelative(config.res)));
+    app.use(config.api.c, express.static(pathHelper.getRelative(config.res)));
+    app.use(config.api.d, express.static(pathHelper.getRelative(config.res)));
+    app.use(config.api.e, express.static(pathHelper.getRelative(config.res)));
+    app.use(config.api.f, express.static(pathHelper.getRelative(config.res)));
+    app.use(config.api.g, express.static(pathHelper.getRelative(config.res)));
+    app.use(config.api.h, express.static(pathHelper.getRelative(config.res)));
     app.use(compression());
-
-    if (config.app.isDevLocal) app.use(cors());
+    if (config.app.isDevLocal) {
+        app.use(cors());
+    }
 
     initSession();
 
@@ -60,8 +61,6 @@ function initExpress() {
 }
 
 function initAuth() {
-    const flash = require('connect-flash');
-    app.use(flash());
     const passport = require('passport');
     auth(passport);
     app.use(passport.initialize());
@@ -72,27 +71,20 @@ function initAuth() {
 function initSession() {
     const cookieParser = require('cookie-parser');
     app.use(cookieParser());
-
     const session = require('cookie-session');
     app.use(session({
         secret: config.web.sessionSecret
     }));
-
-
 }
 
 function initErrorHandling(app: express.Application) {
     (app as any).use(function (err, req, res, next) {
         logger.error(err);
-
         console.log(err);
-
         let message = _.isError(err) ? err.message : err;
         message = config.app.isDevLocal ? message : 'Server Error';
-
         res.status(500).send({error: message});
     });
-
     process.on('uncaughtException', function (err) {
         logger.error(err);
     });

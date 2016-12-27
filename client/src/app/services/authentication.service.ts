@@ -45,6 +45,7 @@ export class AuthenticationService {
     out(): Observable<boolean>  {
         this.token = null;
         localStorage.removeItem('currentUser');
+
         return this.http.get('/logout')
             .map(this.extractData)
             .catch(this.handleError);

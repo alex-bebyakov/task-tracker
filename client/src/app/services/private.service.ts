@@ -1,27 +1,27 @@
 import {Injectable} from "@angular/core";
 import {Http, Response, Headers} from "@angular/http";
-import {Observable} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import "rxjs/add/operator/map";
 import {Task} from "../models/task";
+import {Router} from "@angular/router";
 declare var tempus: any
 declare var _: any
 @Injectable()
 export class PrivateService {
     private task: Task = new Task()
-    private username: ''
-
+    private username: string
+    create: Subject<string> = new Subject<string>();
     constructor(private http: Http) {
-        this.username = JSON.parse(localStorage.getItem("currentUser")).username
+
     }
 
-    init(task: Task) {
-
-        this.task = task;
-        this.task.executor = this.username;
+    setUsername(username: string) {
+       this.username=username
+        this.create.next(this.username)
     }
 
-    getTask() {
-        return this.task
+    getUsername():Observable<string> {
+        return this.create
     }
 
     setTask(task: any, status: string) {
@@ -33,7 +33,42 @@ export class PrivateService {
         this.task.title = task['title']
         this.task.executor = this.username
         this.task.finish = task['finish'];
-   }
+    }
+
+    getTask() {
+        return this.task
+    }
+
+    executors(): Observable<Array<string>> {
+        return this.http.get('/api/list/executors')
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    tasks(): Observable<Array<any>> {
+        let jsonHeaders = new Headers();
+        jsonHeaders.append('Content-Type', 'application/json');
+        return this.http.post('/api/book/tasks', {username: this.username}, {headers: jsonHeaders})
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    update(task: Task,isCreate:boolean): Observable<boolean> {
+        let jsonHeaders = new Headers();
+        jsonHeaders.append('Content-Type', 'application/json');
+        let path='/api/list/create'
+        this.task=task
+        if(!isCreate){
+            path='/api/list/update'
+        }
+        return this.http.post(path, {task: this.task}, {headers: jsonHeaders}).map((response: Response) => {
+            let message = response.json() && response.json().message;
+            if (message == 'taskUpdate'||message == 'taskCreate') {
+                return true;
+            }
+            return false;
+        }).catch(this.handleError);
+    }
 
     getStatus() {
         let result = 'Новая'
@@ -46,37 +81,27 @@ export class PrivateService {
         return result
     }
 
-    users(): Observable<Array<string>> {
-        return this.http.get('/users')
-            .map(this.extractData)
-            .catch(this.handleError);
-    }
-
-    tasks(): Observable<Array<any>> {
-        let jsonHeaders = new Headers();
-        jsonHeaders.append('Content-Type', 'application/json');
-        return this.http.post('/tasks', {username: this.username}, {headers: jsonHeaders})
-            .map(this.extractData)
-            .catch(this.handleError);
-    }
-
-    update(task: Task,isCreate:boolean): Observable<boolean> {
-        let jsonHeaders = new Headers();
-        jsonHeaders.append('Content-Type', 'application/json');
-        let path='/newtask'
-        this.task=task
-        if(!isCreate){
-            path='/refresh'
+    getPriority() {
+        let result = 'Высокий'
+        if (this.task.priority == 1) {
+            result='Нормальный'
         }
-        return this.http.post(path, {task: this.task}, {headers: jsonHeaders}).map((response: Response) => {
-            let message = response.json() && response.json().message;
-            if (message == 'taskUpdate'||message == 'taskCreate') {
-                return true;
-            }
-            return false;
-        })
+        else if(this.task.priority == 2){
+            result='Низкий'
+        }
+        return result
     }
 
+    getBtnCaption(){
+        let result = 'В работу'
+        if (this.task.status == 'inprogress') {
+            result='Завершить'
+        }
+        else if(this.task.status == 'completed'){
+            result='Возобновить'
+        }
+        return result
+    }
 
     checkDate(date: Date): boolean {
         if (tempus(new Date()).between(tempus(date), 'day') < 0) {

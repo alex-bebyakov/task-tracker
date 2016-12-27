@@ -17,11 +17,16 @@ interface IConfigValues {
         port: number,
         sessionSecret: string
     },
-    email: {
-        fromNoReply: string
-    },
-    auth: {
-        useAuth: boolean
+    res:string,
+    api:{
+        a: string
+        b: string
+        c: string
+        d: string
+        e: string
+        f: string
+        g: string
+        h: string
     },
     format: {
         date: string,
@@ -53,16 +58,23 @@ export function loadConfig() {
     (<any>configValues).db = {};
     configValues.db.host = get('db.host');
 
-    (<any>configValues).email = {};
-    configValues.email.fromNoReply = get('email.fromNoReply');
-
-    (<any>configValues).auth = {};
-    configValues.auth.useAuth = get('auth.useAuth');
-
     (<any>configValues).format = {};
     configValues.format.date = get('format.date');
     configValues.format.year = get('format.year');
     configValues.format.currencySymbol = get('format.currencySymbol');
+
+    (<any>configValues).res ="";
+    configValues.res=get('res');
+
+    (<any>configValues).api = {};
+    configValues.api.a = get('api.a');
+    configValues.api.b = get('api.b');
+    configValues.api.c = get('api.c');
+    configValues.api.d = get('api.d');
+    configValues.api.e = get('api.e');
+    configValues.api.f = get('api.f');
+    configValues.api.g = get('api.g');
+    configValues.api.h = get('api.h');
 }
 
 function get(key) {
