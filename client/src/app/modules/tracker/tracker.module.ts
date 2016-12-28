@@ -10,10 +10,10 @@ import {LoginComponent} from "./login/login.component";
 import {ListComponent} from "./private/list/list.component";
 import {BookComponent} from "./private/book/book.component";
 import {PrivateService} from "../../services/private.service";
-
+import { DateValueAccessorModule } from 'angular-date-value-accessor';
 @NgModule({
     imports: [
-        CommonModule, trackerRouting, FormsModule
+        CommonModule, trackerRouting, FormsModule,DateValueAccessorModule,
     ],
     declarations: [TrackerComponent, PrivateComponent, LoginComponent,BookComponent,ListComponent],
     exports: [CommonModule, FormsModule],

@@ -7,9 +7,6 @@ import {FooterModule} from "./modules/footer/footer.module";
 import {TrackerModule} from "./modules/tracker/tracker.module";
 import {AppComponent} from "./app.component";
 import {routing} from "./app.routing";
-import {AuthGuard} from "./services/guard.service";
-import {AuthenticationService} from "./services/authentication.service";
-import {LoginComponent} from "./modules/tracker/login/login.component";
 import { DateValueAccessorModule } from 'angular-date-value-accessor';
 
 @NgModule({

@@ -19,13 +19,21 @@
                    #title="ngModel" required autocomplete="off" [readonly]="!isCreate"/>
             <div *ngIf="f.submitted && !title.valid" class="help-block">Введите наименование задачи</div>
         </div>
-        <div class="form-group finish" [ngClass]="{ 'has-error': f.submitted && !finish.valid }">
+        <div *ngIf="isMoz==false" class="form-group finish" [ngClass]="{ 'has-error': f.submitted && !finish.valid }">
             <label>Дата завершения</label>
             <input type="date" class="form-control" name="finish" useValueAsDate [(ngModel)]="task.finish"
                    #finish="ngModel" required autocomplete="off"
                    [readonly]="readOnly()"/>
             <div *ngIf="f.submitted && !finish.valid" class="help-block">Введите дату</div>
         </div>
+        <div *ngIf="isMoz==true"  class="form-group finish" [ngClass]="{ 'has-error': f.submitted && !finish.valid }">
+            <label>Дата завершения</label>
+            <input type="text" class="form-control" name="finish" [(ngModel)]="task.finish"
+                   #finish="ngModel" required autocomplete="off"
+                   [readonly]="readOnly()"/>
+            <div *ngIf="f.submitted && !finish.valid" class="help-block">Введите дату</div>
+        </div>
+
         <div *ngIf="isCreate==true||task.status!='inprogress'" class="form-group priority" [ngClass]="{ 'has-error': f.submitted && !priority.valid }">
             <label>Приоритет</label>
             <select class="form-control" name="priority" [(ngModel)]="task.priority"

@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {PrivateService} from "../../../../services/private.service";
 import {Task} from "../../../../models/task";
 import {Router} from "@angular/router";
+import * as $ from "jquery"
 
 
 @Component({
@@ -20,6 +21,8 @@ export class ListComponent implements OnInit {
     priority=''
     btnCaption=''
     estimate:any
+    isMoz:boolean=false
+
     constructor(private updateTaskService: PrivateService, public router: Router) {
         let path=location.pathname.substring(1)
         if(path=='create'){
@@ -28,6 +31,7 @@ export class ListComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.isMoz=navigator.userAgent.search("Firefox") >= 0
         if(this.isCreate){
             this.updateTaskService.executors().subscribe(result => {
                 this.users=result;
@@ -60,7 +64,9 @@ export class ListComponent implements OnInit {
                     this.error="Не удалось создать задание."
                 }
             }
-        },error=>{this.error=error})
+        },error=>{
+            console.log(error)
+            this.error=error})
     }
 
     readOnly(){
@@ -80,4 +86,6 @@ export class ListComponent implements OnInit {
         }
         return result
     }
+
+
  }
