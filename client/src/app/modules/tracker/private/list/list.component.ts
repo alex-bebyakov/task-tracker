@@ -31,7 +31,7 @@ export class ListComponent implements OnInit {
         if(this.isCreate){
             this.updateTaskService.executors().subscribe(result => {
                 this.users=result;
-            })
+            },error=>{this.error=error})
         }else{
             this.task=this.updateTaskService.getTask()
             this.status=this.updateTaskService.getStatus()
@@ -60,7 +60,7 @@ export class ListComponent implements OnInit {
                     this.error="Не удалось создать задание."
                 }
             }
-        })
+        },error=>{this.error=error})
     }
 
     readOnly(){
